@@ -6,4 +6,4 @@
 | 常量区(.rodata)                | 用于初始化变量的常量 | 只读     |
 | 代码区(.text)                  | 代码指令             | 只读     |
 
-![](C:\Users\QY\Desktop\C++\markdown\picture\内存分区.png)
+![](..\picture\内存分区.png)
