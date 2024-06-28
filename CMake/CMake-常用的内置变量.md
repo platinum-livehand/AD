@@ -1,4 +1,4 @@
-​	CMake 提供了许多内置变量，用于配置和控制构建过程。这些变量可以分为几类，包括路径和目录、项目和目标、编译器和平台、构建类型、以及用户定义变量。
+	CMake 提供了许多内置变量，用于配置和控制构建过程。这些变量可以分为几类，包括路径和目录、项目和目标、编译器和平台、构建类型、以及用户定义变量。
 
 ## 路径和目录变量
 
@@ -15,9 +15,8 @@ project/
 ├─src  
 │       CMakeLists.txt  
 │ 
-├─include  
-│      	CMakeLists.txt
-
+└─include  
+      	CMakeLists.txt
 ```
 
 ​	在 `src/CMakeLists.txt` 中，`CMAKE_SOURCE_DIR` 将指向 `/project` 目录。而在 `include/CMakeLists.txt` 中，`CMAKE_SOURCE_DIR` 也将指向 `/project` 目录。因为这两个子目录都是 `/project`目录下的子目录。
