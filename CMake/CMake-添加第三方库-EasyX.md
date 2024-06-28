@@ -1,6 +1,4 @@
-## 添加第三方库-EasyX
-
-### 项目结构：
+## 项目结构
 
 ```powershell
 test/
@@ -31,44 +29,42 @@ test/
 └─src
 ```
 
-### CMakeLists.txt
+## CMakeLists.txt
 
 ```cmake
 # windows第一次执行 cmake .. -G "MinGW Makefiles"
-CMAKE_MINIMUM_REQUIRED (VERSION 3.8)
-
-SET(CMAKE_C_COMPILER "D:/Qt/Qt5.12.6/Tools/mingw730_64/bin/gcc.exe")
-SET(CMAKE_CXX_COMPILER "D:/Qt/Qt5.12.6/Tools/mingw730_64/bin/g++.exe")
+cmake_minimum_required(VERSION 3.29.0)
 
 # 项目名称
-PROJECT(cmake_test)
+project(cmake_test)
 
 # 设置C++标准
-SET(CMAKE_CXX_STANDARD 14)
-SET(CMAKE_CXX_STANDARD_REQUIRED ON)
-SET(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD 14)
+
+# 设置输出目录
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # 添加源文件目录
-AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src SRC_LIST)
+aux_source_directory(${PROJECT_SOURCE_DIR}/src SRC_LIST)
 
 # 添加头文件目录
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/inc)
+include_directories(${PROJECT_SOURCE_DIR}/inc)
 
-# 设置exe输出路径
-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+# 生成可执行程序
+add_executable(${PROJECT_NAME} ${SRC_LIST} main.cpp)
 
-# 设置lib输出路径
-SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+# 可执行程序包含 EasyX 库的头文件
+target_include_directories(${PROJECT_NAME} 
+PUBLIC 
+${PROJECT_SOURCE_DIR}/EasyX/include)
 
-# 生成exe    
-ADD_EXECUTABLE(${PROJECT_NAME} ${SRC_LIST} main.cpp)
-
-# 添加 EasyX 库
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/EasyX/lib64/libeasyx.a)
-TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/EasyX/include)
+# 可执行程序链接 EasyX 库
+target_link_libraries(${PROJECT_NAME} 
+PUBLIC
+${PROJECT_SOURCE_DIR}/EasyX/lib64/libeasyx.a)
 ```
 
-### main.cpp
+## main.cpp
 
 ```c++
 #include<graphics.h>
