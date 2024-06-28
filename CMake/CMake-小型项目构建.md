@@ -9,7 +9,6 @@ cmake_planning_test/
 │      planning_main.exe
 │
 ├─build
-│
 ├─include
 │      pnc_map.h
 │      process.h
