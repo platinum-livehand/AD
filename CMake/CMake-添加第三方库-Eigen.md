@@ -27,27 +27,32 @@ cmake_planning_demo/
 │  │      process.h
 │  │
 │  └─show_result
-│          CMakeLists.txt
-│          show_result.cpp
-│          show_result.h
+│         CMakeLists.txt
+│         show_result.cpp
+│         show_result.h
 │
 ├─test
 └─third_party
-    └─EasyX
-        │  readme.txt
-        │
-        ├─include
-        │      easyx.h
-        │      graphics.h
-        │
-        ├─lib-for-devcpp_5.4.0
-        │      libeasyx.a
-        │
-        ├─lib32
-        │      libeasyx.a
-        │
-        └─lib64
-                libeasyx.a
+    ├─EasyX
+    │  ├─include
+    │  ├─lib-for-devcpp_5.4.0
+    │  ├─lib32
+    │  └─lib64
+    └─eigen-3.4.0
+        ├─.gitlab
+        ├─bench
+        ├─blas
+        ├─ci
+        ├─cmake
+        ├─debug
+        ├─demos
+        ├─doc
+        ├─Eigen
+        ├─failtest
+        ├─lapack
+        ├─scripts
+        ├─test
+        └─unsupported
 ```
 
 ## CMakeLists.txt
@@ -71,7 +76,14 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(PROCESS_DIR ${CMAKE_SOURCE_DIR}/src/process)
 set(PNC_MAP_DIR ${CMAKE_SOURCE_DIR}/src/pnc_map)
 set(SHOW_RESULT_DIR ${CMAKE_SOURCE_DIR}/src/show_result)
-set(EasyX_DIR ${CMAKE_SOURCE_DIR}/third_party/EasyX)
+set(EASYX_DIR ${CMAKE_SOURCE_DIR}/third_party/EasyX)
+set(EIGEN3_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/third_party/eigen-3.4.0)
+
+list(APPEND CMAKE_MODULE_PATH "${EIGEN3_INCLUDE_DIR}/cmake")
+
+message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
+
+find_package(Eigen3 3.4 REQUIRED)
 
 # 添加子目录
 add_subdirectory(src)
@@ -82,7 +94,6 @@ add_subdirectory(src)
 ```cmake
 project(planning_main)
 
-# 添加子目录
 add_subdirectory(pnc_map)
 add_subdirectory(process)
 add_subdirectory(show_result)
@@ -105,7 +116,7 @@ show_result
 )
 ```
 
-### pnc_map 目录
+### pnc_map
 
 ```cmake
 project(pnc_map)
@@ -117,7 +128,7 @@ pnc_map.cpp
 )
 ```
 
-### process 目录
+### process
 
 ```cmake
 project(process)
@@ -138,14 +149,16 @@ ${PNC_MAP_DIR}
 target_link_libraries(${PROJECT_NAME}
 PUBLIC
 pnc_map
+Eigen3::Eigen
 )
 ```
 
-### show_result 目录
+### show_result
 
 ```cmake
 project(show_result)
 
+# 生成动态库
 add_library(${PROJECT_NAME}
 SHARED
 show_result.cpp
@@ -155,14 +168,14 @@ show_result.cpp
 target_include_directories(${PROJECT_NAME}
 PUBLIC
 ${PROCESS_DIR}
-${EasyX_DIR}/include
+${EASYX_DIR}/include
 )
 
 # 链接库
 target_link_libraries(${PROJECT_NAME}
 PUBLIC
 process
-${EasyX_DIR}/lib64/libeasyx.a
+${EASYX_DIR}/lib64/libeasyx.a
 )
 ```
 
@@ -217,6 +230,14 @@ void Process::planProcess()
 {
     std::cout << "this is planning process" << std::endl;
     my_map.mapInfo();
+    
+    Eigen::MatrixXd m(2,2);
+    m(0, 0) = 3;
+    m(1, 0) = 5;
+    m(0, 1) = -1;
+    m(1, 1) = m(1, 0) + m(0, 1);
+    std::cout << m << std::endl;
+    
     std::cout << "planning success!" << std::endl;
 }
 ```

@@ -66,13 +66,13 @@ add_subdirectory(process)
 # 生成可执行程序
 add_executable(${PROJECT_NAME} planning_main.cpp)
 
-# 可执行程序包含 process 目录
+# 添加包含
 target_include_directories(${PROJECT_NAME}
 PUBLIC
 ${PROCESS_DIR}
 )
 
-# 可执行程序链接 libprocess.dll
+# 链接库
 target_link_libraries(${PROJECT_NAME}
 PUBLIC
 process
@@ -84,7 +84,7 @@ process
 ```cmake
 project(pnc_map)
 
-# 生成动态库 libpnc_map.dll
+# 生成动态库
 add_library(${PROJECT_NAME}
 SHARED
 pnc_map.cpp
@@ -96,19 +96,19 @@ pnc_map.cpp
 ```cmake
 project(process)
 
-# 生成动态库 libprocess.dll
+# 生成动态库
 add_library(${PROJECT_NAME}
 SHARED
 process.cpp
 )
 
-# 动态库包含 pnc_map 目录
+# 添加包含
 target_include_directories(${PROJECT_NAME}
 PUBLIC
 ${PNC_MAP_DIR}
 )
 
-# 动态库链接 libpnc_map.dll
+# 链接库
 target_link_libraries(${PROJECT_NAME}
 PUBLIC
 pnc_map
