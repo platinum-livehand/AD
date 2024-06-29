@@ -29,7 +29,9 @@ cmake_planning_demo/
 └─third_party
 ```
 
-## 项目根目录的 CMakeLists.txt
+## CMakeLists.txt
+
+### 根目录
 
 ```cmake
 cmake_minimum_required(VERSION 3.29.0)
@@ -52,7 +54,7 @@ set(PNC_MAP_DIR ${CMAKE_SOURCE_DIR}/src/pnc_map)
 add_subdirectory(src)
 ```
 
-## src 目录下的 CMakeLists.txt
+### src 目录
 
 ```cmake
 project(planning_main)
@@ -77,7 +79,7 @@ process
 )
 ```
 
-## pnc_map 目录下的 CMakeLists.txt
+### pnc_map 目录
 
 ```cmake
 project(pnc_map)
@@ -89,7 +91,7 @@ pnc_map.cpp
 )
 ```
 
-## process 目录下的 CMakeLists.txt
+### process 目录
 
 ```cmake
 project(process)
@@ -113,7 +115,9 @@ pnc_map
 )
 ```
 
-## pnc_map.h
+## 源码
+
+### pnc_map.h
 
 ```c++
 #pragma once
@@ -125,7 +129,7 @@ public:
 };
 ```
 
-## pnc_map.cpp
+### pnc_map.cpp
 
 ```c++
 #include <iostream>
@@ -137,7 +141,7 @@ void PNC_Map::mapInfo()
 }
 ```
 
-## process.h
+### process.h
 
 ```c++
 #pragma once
@@ -152,7 +156,7 @@ public:
 };
 ```
 
-## process.cpp
+### process.cpp
 
 ```c++
 #include <iostream>
