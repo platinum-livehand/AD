@@ -1,4 +1,6 @@
-	C++ 智能指针是一种用于自动管理动态分配内存的对象，它可以帮助防止内存泄漏和指针错误。C++ 标准库提供了几种智能指针，如 `std::unique_ptr`、`std::shared_ptr`和 `std::weak_ptr`。以下是这些智能指针的使用示例。
+​	
+
+​	C++ 智能指针是一种用于自动管理动态分配内存的对象，它可以帮助防止内存泄漏和指针错误。C++ 标准库提供了几种智能指针，如 `std::unique_ptr`、`std::shared_ptr`和 `std::weak_ptr`。以下是这些智能指针的使用示例。
 
 ## 独占指针 `std::unique_ptr`
 
@@ -136,4 +138,86 @@ int main() {
 ​	`std::shared_ptr`允许多个指针实例共享同一个资源的所有权，这在下面的情况下特别有用：
 
 1. **共享资源**：当多个对象需要共享同一资源的访问时，`std::shared_ptr` 是理想的选择。例如，共享数据缓存、共享访问复杂的数据结构或多线程应用中的共享资源。
-2. **实现观察者模式**：在观察者设计模式中，多个观察者对象可能需要访问相同的被观察对象，`std::shared_ptr`可以在观察者之间共享对
+2. **实现观察者模式**：在观察者设计模式中，多个观察者对象可能需要访问相同的被观察对象，`std::shared_ptr`可以在观察者之间共享对被观察者的访问。
+3. **循环引用**：在存在对象间项目引用的复杂关系时(如图或者树结构)，`std::shared_ptr`可以用来防止内存泄漏。
+
+### 共享资源
+
+```c++
+#include <iostream>
+#include <memory>
+#include <vector>
+
+class SharedResource {
+public:
+    SharedResource() { std::cout << "SharedResource created\n"; }
+    ~SharedResource() { std::cout << "SharedResource destroyed\n"; }
+    void use() { std::cout << "Using shared resource\n"; }
+};
+
+void useSharedResource(std::shared_ptr<SharedResource> res) {
+    res->use();
+}
+
+int main() {
+    auto sharedRes = std::make_shared<SharedResource>();
+    std::vector<std::shared_ptr<SharedResource>> users;
+
+    for (int i = 0; i < 3; ++i) {
+        users.push_back(sharedRes);  // 添加多个对同一资源的引用
+        useSharedResource(sharedRes);
+    }
+}
+```
+
+​	这里，`SharedResource`被多个用户共享。通过使用 `std::shared_ptr`，可以确保在所有用户完成使用后，资源被自动释放。
+
+## 弱指针 `std::weak_ptr` 的应用场景
+
+​	`std::weak_ptr`是一种非拥有性智能指针，经常与 `std::shared_ptr`配合使用，主要用于以下场景：
+
+1. **解决循环引用**：在使用 `std::shared_ptr` 时，对象间的循环引用可能导致内存泄漏。`std::weak_ptr` 可以打破这种循环，因为它不增加引用计数。
+2. **缓存实现**：`std::weak_ptr` 可以用于实现资源缓存机制。它可以监视资源是否仍然被其它所有者使用，如果不再使用，可以安全地从缓存中删除。
+3. **安全的临时访问**：`std::weak_ptr` 提供一种安全的方式来临时访问由 `std::shared_ptr` 管理的资源，而不会意外地延长其生命周期。
+
+```c++
+#include <iostream>
+#include <memory>
+
+class A;
+
+class B {
+public:
+    std::weak_ptr<A> a_ptr;  // 使用 weak_ptr 来解决循环引用
+    ~B() { std::cout << "B destroyed\n"; }
+};
+
+class A {
+public:
+    std::shared_ptr<B> b_ptr;
+    ~A() { std::cout << "A destroyed\n"; }
+};
+
+int main() {
+    auto a = std::make_shared<A>();
+    auto b = std::make_shared<B>();
+
+    a->b_ptr = b;
+    b->a_ptr = a;
+
+    std::cout << "Shared Pointer a count = " << a.use_count() << std::endl;
+    std::cout << "Shared Pointer b count = " << b.use_count() << std::endl;
+
+    return 0;
+}
+```
+
+​	这个例子中，两个类 A 和 B 相互引用，使用 `std::weak_ptr` 可以防止循环引用导致内存的泄漏。当其中一个对象被销毁时，`std::weak_ptr` 不会阻止另一个对象的销毁。
+
+## 总结
+
+- `std::unique_ptr` 适用于资源的独占管理和所有权转移。
+- `std::shared_ptr` 适用于资源共享的场景，尤其是多个对象需要访问同一资源时。
+- `std::weak_ptr`主要用于解决 `std::shared_ptr` 可能引起的循环引用问题，或者当需要一个非永久性的对象引用但又不想拥有对象时。
+
+​	虽然智能指针和传统指针都用于访问动态分配的内存，但智能指针通过提供自动内存管理、引用计数和所有权语义等功能，大大提高了代码的安全性和易用性。在现代C++编程中，推荐使用智能指针以避免手动内存管理中常见的错误。
