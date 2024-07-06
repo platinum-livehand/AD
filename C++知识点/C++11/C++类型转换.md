@@ -1,4 +1,4 @@
-# C++类型转换
+## C++类型转换
 
 ​	C++中类型转换分为两大类：**隐式类型转换**（Implicit Conversion）和**显式类型转换**（Explicit Conversion）。
 

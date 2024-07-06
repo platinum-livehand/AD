@@ -130,7 +130,11 @@ test c = 2
 c = 2
 ```
 
+​	所有包含了 `extern int c;` 所在的头文件的编译单元共用同一个变量 `c`
+
 ## 2. static 的全局变量
+
+​	static 定义的全局变量一般不在头文件中使用。
 
 ```c++
 // test.h
@@ -175,12 +179,12 @@ int main()
     test_showc();
 
     cout << "====== test update c ======" << endl;
-    test_setc();
+    test_setc(); // 修改 test.cpp 中的 c
     cout << "main c = " << c << endl;
     test_showc();
 
     cout << "====== main update c ======" << endl;
-    c = 3;
+    c = 3; // 修改 main.cpp 中的 c
     cout << "main c = " << c << endl;
     test_showc();
     
@@ -201,3 +205,4 @@ main c = 3
 test c = 2
 ```
 
+​	`main.cpp`中的变量`c`和`test.cpp`中的变量`c`不是同一个`c`。
