@@ -1,44 +1,81 @@
-## 外部链接性
+## 外部链接性(跨编译单元)
 
-​	在C++中，关键字`extern`用于声明变量或函数的外部链接性（external linkage）。外部链接性表示该变量或函数可以被其他文件中的代码所访问和使用。
+​	在C++中，关键字`extern`用于声明变量或函数的**外部链接性**（external linkage）。外部链接性表示该变量或函数可以被其他文件中的代码所访问和使用。
 
-具体来说，`extern`关键字有两种常见的用法：
+## 声明外部变量
 
-- 声明外部变量： 当在一个文件中使用外部定义的全局变量时，需要使用`extern`关键字进行声明。这告诉编译器该变量是在其他文件中定义的，并且需要在链接时找到其定义。
-
+​	在 C++ 中，`extern` 关键字用于声明在其他文件中定义的变量，这样可以在当前文件中引用该变量。
 
 ```c++
-// File1.cpp
-int globalVariable = 10; // 定义全局变量
+// file.cpp
+#include <iostream>
 
-// File2.cpp
-extern int globalVariable; // 声明全局变量，表示该变量是在其他文件中定义的
+// 定义全局变量
+int globalVar = 42; 
+
+// 定义全局函数
+void printGlobalVar() {
+    std::cout << "Global variable: " << globalVar << std::endl;
+}
 ```
 
-在头文件中声明变量时，使用`extern`关键字可以确保该变量的定义不会在每个包含该头文件的源文件中重复出现。
-
 ```c++
-// MyHeader.h
-extern int globalVariable; // 在头文件中声明全局变量
+// mian.cpp
+#include <iostream>
 
-// File1.cpp
-#include "MyHeader.h"
-// 可以使用 globalVariable
+// 声明在其他文件中定义的全局变量
+extern int globalVar;
 
-// File2.cpp
-#include "MyHeader.h"
-// 可以使用 globalVariable
-```
+// 声明在其他文件中定义的全局函数
+extern void printGlobalVar();
 
-- 声明外部函数： 当在一个文件中使用其他文件中定义的函数时，同样需要使用`extern`关键字进行声明。
-
-
-```c++
-// main.c
-extern void someFunction(); // 使用extern声明函数
+void modifyGlobalVar() {
+    globalVar = 100;
+}
 
 int main() {
-    someFunction(); // 调用在另一个文件中定义的函数
+    printGlobalVar(); // 输出: Global variable: 42
+    modifyGlobalVar();
+    printGlobalVar(); // 输出: Global variable: 100
+    return 0;
+}
+```
+
+​	通过这种方式，你可以在多个文件之间共享全局变量和函数，而不需要通过 `#include` 指令来包含它们的定义。这种方法特别适用于跨文件共享全局状态的场景。
+
+## 在命名空间中使用`extern`
+
+```c++
+// file.cpp
+#include <iostream>
+
+namespace MyNamespace {
+    int globalVar = 42; // 定义全局变量
+
+    void printGlobalVar() {
+        std::cout << "Global variable: " << globalVar << std::endl;
+    }
+}
+```
+
+```c++
+// main.cpp
+#include <iostream>
+
+// 声明在其他文件中定义的全局变量和函数
+namespace MyNamespace {
+    extern int globalVar;
+    extern void printGlobalVar();
+}
+
+void modifyGlobalVar() {
+    MyNamespace::globalVar = 100;
+}
+
+int main() {
+    MyNamespace::printGlobalVar(); // 输出: Global variable: 42
+    modifyGlobalVar();
+    MyNamespace::printGlobalVar(); // 输出: Global variable: 100
     return 0;
 }
 ```
