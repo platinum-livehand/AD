@@ -4,13 +4,19 @@
 
 ![](..\picture\git reset-1.png)
 
+![](..\picture\git reset-2.png)
+
 ## git reset --hard
 
 ​	`git reset --hard`会重置 HEAD 和 branch 的同时，重置暂存区和工作目录里的内容。你的暂存区和工作目录中的内容会被完全重置为和 HEAD 的新位置相同的内容。
 
+![](..\picture\git reset-5.png)
+
 ## git reset --soft
 
-​	`git reset --soft`会重置 HEAD 和 branch 的同时，保留工作目录和暂存区的内容，并把重置 HEAD 所带来的新差异放进暂存区。
+​	`git reset --soft`会重置 HEAD 和 branch 的同时，**保留工作目录和暂存区的内容**，并**把重置 HEAD 所带来的新差异放进暂存区**。
+
+![](..\picture\git reset-3.png)
 
 ### 使用场景
 
@@ -20,7 +26,9 @@
 
 ## git reset --mixed
 
-​	`git reset --mixed`会将当前分支的 HEAD 指针移动到指定的提交，同时保留工作区的更改，但将暂存区的更改移回工作区。
+​	`git reset --mixed`会将当前分支的 HEAD 指针移动到指定的提交，**同时保留工作区的更改**。
+
+![](..\picture\git reset-4.png)
 
 1. **撤销提交但保留更改**，你可能已经做了一个或多个提交，但后来发现这些提交有问题，需要重新调整这些更改。在这种情况下，你可以使用 `git reset --mixed`撤销这些提交，同时保留工作区中的更改，以便你可以重新整理和提交。
 2. **修正最近的提交**，如果你发现最近的提交有错误或者遗漏了部分更改，可以使用 `git reset --mixed`撤销最近的提交，然后修正这些错误或添加遗漏的更改，再次提交。
