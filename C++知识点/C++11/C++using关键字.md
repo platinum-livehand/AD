@@ -1,6 +1,6 @@
-# `typedef` 和 `using` 的使用示例
+## `typedef` 和 `using` 的使用示例
 
-## 1. 为基本数据类型创建别名
+### 1. 为基本数据类型创建别名
 
 ```c++
 // 使用 typedef
@@ -12,7 +12,7 @@ using ulong = unsigned long;
 ulong myNumber = 123456789;
 ```
 
-## 2. 为指针创建别名
+### 2. 为指针创建别名
 
 ```c++
 // 使用 typedef
@@ -24,7 +24,7 @@ using pChar = char*;
 pChar myString = "Hello, World!";
 ```
 
-## 3. 为数组类型创建别名
+### 3. 为数组类型创建别名
 
 ```c++
 // 使用 typedef 
@@ -36,7 +36,7 @@ using intArray = int[10];
 intArray numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 ```
 
-## 4. 为结构体创建别名
+### 4. 为结构体创建别名
 
 ```c++
 // 使用 typedef
@@ -56,7 +56,7 @@ using Point = struct
 Point p1 = {10, 20};
 ```
 
-## 5. 为函数指针创建别名
+### 5. 为函数指针创建别名
 
 ```c++
 // 使用 typedef
@@ -74,7 +74,7 @@ void myFunction()
 FunctionPointer fp = myFunction;
 ```
 
-## 6. 总结
+### 6. 总结
 
 ​	`using` 和 `typedef` 主要区别在于， `using` 提供了更好的语法一致性，尤其是对于模板命名。例如，你可以定义一个模板别名如下：
 
