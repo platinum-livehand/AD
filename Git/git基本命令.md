@@ -12,7 +12,7 @@
 
 ![](..\picture\git-2.png)
 
-​	在 `learngit` 目录下创建一个 `readme.txt` 文档。
+​	在 `Thread_Pool` 目录下创建一个 `.gitignore` 文档。
 
 ![](..\picture\git-3.png)
 
@@ -25,19 +25,11 @@
 
 ## 提交并查看修改
 
-​	如果我们修改了 `readme.txt` 文档中的内容，想让知道仓库的状态，使用 `git status`命令查看结果。
+​	如果我们修改了文档中的内容，想让知道仓库的状态，使用 `git status`命令查看结果。
 
 ![](..\picture\git-6.png)
 
-​	以上输出告诉我们 `readme.txt` 被修改过了，但没有提交。如果想知道具体修改了什么内容，则输入 `git diff`：
-
-![](..\picture\git-7.png)
-
-提交修改 `git add .` +`git commit -m "xxxxx"`
-
-![](..\picture\git-8.png)
-
-![](..\picture\git-9.png)
+​	以上输出告诉我们被修改过了，但没有提交。如果想知道具体修改了什么内容，则输入 `git diff`
 
 ## 查看提交历史
 
@@ -45,22 +37,18 @@
 
 ![](..\picture\git-10.png)
 
-## 回退版本
+## 提交至远程仓库
 
-​	在 Git 中，`HEAD`表示当前版本，也就是最新的提交。而上个版本就是 `HEAD^`，上上个版本就是 `HEAD^^`，x个版本可以写为 `HEAD~x`。
-
-​	想让 `readme.txt` 回退到上个版本，使用 `git reset --hard HEAD^`。
+​	在 `github` 上新建一个仓库，复制仓库地址，然后使用命令`git remote add origin xxx`将本地仓库关联到 `github` 上。
 
 ![](..\picture\git-11.png)
 
-​	再使用 `git log` 查看记录，第三次提交被撤回。
-
 ![](..\picture\git-12.png)
 
-​	如果又需要把第三次提交退回使用 `git reflog`他会记录你的每一次命令。
+​	由于 github 不再支持使用账户密码进行身份验证，所以需要使用指令 `git remote set-url origin https://<your_token>@github.com/<USERNAME>/<REPO>.git` 添加Token令牌。
 
-![](..\picture\git-13.png)
+![](D:\C++Project\C++\AD\picture\git-13.png)
 
-​	再使用  `git reset --hard 66af877`既可以恢复第三次提交。
+​	使用命令 `git push -u origin master` 推送至远程仓库
 
 ![](..\picture\git-14.png)
