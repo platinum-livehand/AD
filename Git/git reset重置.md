@@ -14,7 +14,7 @@
 
 ## git reset --soft
 
-​	`git reset --soft`会重置 HEAD 和 branch 的同时，**保留工作目录和暂存区的内容**，并**把重置 HEAD 所带来的新差异放进暂存区**。
+​	`git reset --soft`会重置 HEAD 和 branch 的同时，**保留工作目录和暂存区的内容**，并**把重置 HEAD 所带来的新差异放进暂存区**。重置后**本地的代码不会跟着回退**，我们可以基于目前的代码改完后再次提交。
 
 ![](..\picture\git reset-3.png)
 
