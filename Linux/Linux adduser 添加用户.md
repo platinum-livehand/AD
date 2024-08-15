@@ -1,0 +1,92 @@
+## 添加删除用户
+
+​	作为一个普通用户是没有给系统添加新用户这个权限的，如果想要添加新用户可以先切换到 `root` 用户，或者是基于普通用户为其添加管理员权限来完成新用户的添加。添加新用户需要使用 `adduser` 命令来完成。
+
+## 添加新用户
+
+```shell
+# 添加用户
+# sudo -> 使用管理员权限执行这个命令
+$ sudo adduser 用户名
+
+# centos
+$ sudo useradd 用户名
+
+# ubuntu
+$ sudo useradd -m -s /bin/bash  用户名
+
+# 在使用 adduser 添加新用户的时候，有的Linux版本执行完命令就结束了，有的版本会提示设置密码等用户信息
+qy@ubuntu:~$ qy@ubuntu:~$ sudo adduser test_user
+[sudo] qy 的密码： 
+正在添加用户"test_user"...
+正在添加新组"test_user" (1001)...
+正在添加新用户"test_user" (1001) 到组"test_user"...
+创建主目录"/home/test_user"...
+正在从"/etc/skel"复制文件...
+新的 密码： 
+重新输入新的 密码： 
+passwd：已成功更新密码
+正在改变 test_user 的用户信息
+请输入新值，或直接敲回车键以使用默认值
+        全名 []: 
+        房间号码 []: 
+        工作电话 []: 
+        家庭电话 []: 
+        其它 []: 
+这些信息是否正确？ [Y/n] y
+qy@ubuntu:~$ su - test_user 
+密码： 
+test_user@ubuntu:~$ whoami
+test_user
+```
+
+## 删除用户
+
+​	删除用户并不是将 /home 下的用户家目录删除就完事了，我们需要使用 userdle 命令才能删除用户在系统中的用户 ID 和所属组 ID 等相关信息，但是需要注意的是某些 Linux 版本中用户虽然被删除了，但是它的家目录却没有被删除，需要我们手动将其删除。
+
+```shell
+# 删除用户, 添加参数 -r 就可以一并删除用户的家目录了
+$ sudo userdel 用户名 -r
+
+qy@ubuntu:~$ sudo userdel test_user -r
+[sudo] qy 的密码： 
+userdel: test_user 邮件池 (/var/mail/test_user) 未找到
+qy@ubuntu:~$ ls home/
+ls: 无法访问 'home/': 没有那个文件或目录
+qy@ubuntu:~$ ls /home
+lost+found  qy
+```
+
+## 添加删除用户组
+
+​	默认情况下，只要创建新用户就会得到一个同名的用户组，并且这个用户属于这个组。一般情况下不需要创建新的用户组，如果有需求可以使用 `groupadd` 添加用户组，使用 `groupdel` 删除用户组。
+
+```shell
+# 基于普通用户创建新的用户组
+$ sudo groupadd 组名
+
+# 基于普通用户删除已经存在的用户组
+$ sudo groupdel 组名
+```
+
+## 修改密码
+
+​	Linux 中设置用户密码和修改用户密码的方式是一样的，修改用户密码又分为几种情况：**修改当前用户密码**，**普通用户A 修改其他普通用户密码**，**普通用户A修改root用户密码**，**root用户修改普通用户密码**。修改密码需要使用 `passwd` 命令。当创建了一个普通用户却没有提示指定密码，或者忘记了用户密码都可以通过该命令实现重置密码的需求。
+
+- 当前用户修改自己的密码，默认是有权限操作的。
+- 当前普通用户修改其他用户密码，默认没有权限，需要借助管理员权限才能完成操作。
+- 当前普通用户修改root用户密码，默认没有权限，需要借助管理员权限才能完成操作。
+- root 用户修改其他普通用户密码，默认有权限，可以直接修改。
+
+```shell
+# passwd
+# 修改当前用户
+$ passwd
+
+# 修改非当前用户密码
+$ sudo passwd 用户名
+
+# 修改root
+$ sudo passwd root
+```
+
