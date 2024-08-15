@@ -14,6 +14,8 @@ mv original_name new_name
 
 ​	`original_name`**可以是文件也可以是目录**，并且是**存在的**，`new_name`**不存在**。
 
+![](..\picture\Linux-1.png)
+
 ## 文件覆盖
 
 ```shell
