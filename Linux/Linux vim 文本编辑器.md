@@ -1,3 +1,29 @@
+## vim 更新
+
+​	查看 vim 版本
+
+```shell
+vim --version
+```
+
+​	更新 vim
+
+```shell
+sudo add-apt-repository ppa:jonathonf/vim 
+sudo apt update
+sudo apt upgrade
+```
+
+## vimplus 插件
+
+```shell
+git clone https://github.com/chxuan/vimplus.git ~/.vimplus
+cd ~/.vimplus
+./install.sh //不加sudo
+```
+
+​	为防止 vimplus 显示乱码，需要设置 linux 终端（远程终端）字体为 `Droid Sans Mono Nerd Font`。
+
 ## Vim 的模式
 
 ​	在 vim 中一共有三种模式，分别是 **命令模式**、**末行模式**、**编辑模式**，当我们打开 vim 之后默认进入的是命令模式。
