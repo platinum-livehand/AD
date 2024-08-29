@@ -1,17 +1,19 @@
-## 列出当前目录内容
+## 列出目录信息
 
-```shell
-ls
+```cmd
+$ ls [args]           # 查看当前目录
+$ ls [args] 目录名 	# 查看指定目录
+$ ls [args] 文件名 	# 查看某个文件的信息
 ```
 
 ## 长格式显示文件信息
 
-```shell
-ls -l
+```cmd
+ls -l == ll
 ```
 
-```shell
-root@localhost:/# ls -l
+```cmd
+# ls -l
 总计 3405916
 lrwxrwxrwx   1 root root          7  4月 22 21:08 bin -> usr/bin
 drwxr-xr-x   2 root root       4096  2月 26 20:58 bin.usr-is-merged
@@ -41,12 +43,12 @@ drwxr-xr-x  12 root root       4096  4月 24 18:47 usr
 drwxr-xr-x  14 root root       4096  7月 10 15:47 var
 ```
 
-​	这个选项以长格式列出文件信息，包括权限、所有者、文件大小和最后修改时间等。
+​	这个选项以长格式列出文件信息，包括**权限**、**所有者**、**文件大小**和**最后修改时间**等。
 
 ## 列出所有文件(包含隐藏文件)
 
-```shell
-root@localhost:/home/qy# ls -la
+```cmd
+# ls -la
 总计 124
 drwxr-x--- 22 qy   qy   4096  7月 18 18:01 .
 drwxr-xr-x  3 root root 4096  7月 10 15:48 ..
@@ -86,8 +88,8 @@ drwxrwxr-x  4 qy   qy   4096  7月 10 16:12 .vscode
 ls -lS
 ```
 
-```shell
-root@localhost:/home/qy/Data-Structure# ls -lS
+```cmd
+# ls -lS
 总计 40
 drwxrwxr-x 2 qy qy 4096  7月 18 12:02 bin
 drwxrwxr-x 5 qy qy 4096  7月 18 10:50 build
@@ -103,12 +105,12 @@ drwxrwxr-x 2 qy qy 4096  7月 13 17:00 third_party
 
 ## 按时间排序（最近修改的文件排在前面)
 
-```shell
+```cmd
 ls -lt
 ```
 
-```shell
-root@localhost:/home/qy/Data-Structure# ls -lt
+```cmd
+# ls -lt
 总计 40
 drwxrwxr-x 2 qy qy 4096  7月 18 12:02 bin
 drwxrwxr-x 5 qy qy 4096  7月 18 10:50 build
@@ -128,8 +130,8 @@ drwxrwxr-x 2 qy qy 4096  7月 13 15:48 lib
 ls -lh
 ```
 
-```shell
-root@localhost:/home/qy/Data-Structure# ls -lh
+```cmd
+# ls -lh
 总计 40K
 drwxrwxr-x 2 qy qy 4.0K  7月 18 12:02 bin
 drwxrwxr-x 5 qy qy 4.0K  7月 18 10:50 build
@@ -141,5 +143,31 @@ drwxrwxr-x 2 qy qy 4.0K  7月 13 15:48 lib
 drwxrwxr-x 7 qy qy 4.0K  7月 18 10:47 src
 drwxrwxr-x 2 qy qy 4.0K  7月 13 17:00 test
 drwxrwxr-x 2 qy qy 4.0K  7月 13 17:00 third_party
+```
+
+## 显示目录后缀
+
+```cmd
+# 直接查看文件信息
+# ls -l
+total 8
+drwxr-xr-x 2 root root 4096 Jan 25 14:29 dir
+-rw-r--r-- 1 root root    0 Jan 25 14:49 haha.tar.gz
+-rwxrwxrwx 1 root root    0 Jan 25 14:49 hello
+lrwxrwxrwx 1 root root   15 Jan 25 14:30 link -> /root/file/test
+prw-r--r-- 1 root root    0 Jan 25 14:24 pipe-2
+drwxrwxrwx 2 root root 4096 Jan 25 15:20 subdir
+-rw-r--r-- 1 root root    0 Jan 25 14:23 test
+
+# 添加了 -F 参数查看文件信息
+# ls -lF
+total 8
+drwxr-xr-x 2 root root 4096 Jan 25 14:29 dir/
+-rw-r--r-- 1 root root    0 Jan 25 14:49 haha.tar.gz
+-rwxrwxrwx 1 root root    0 Jan 25 14:49 hello*
+lrwxrwxrwx 1 root root   15 Jan 25 14:30 link -> /root/file/test
+prw-r--r-- 1 root root    0 Jan 25 14:24 pipe-2|
+drwxrwxrwx 2 root root 4096 Jan 25 15:20 subdir/
+-rw-r--r-- 1 root root    0 Jan 25 14:23 test
 ```
 

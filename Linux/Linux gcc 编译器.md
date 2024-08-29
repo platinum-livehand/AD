@@ -91,9 +91,9 @@ int main(void)
 ​	对源文件进行预处理，需要使用的 gcc 参数为 `-E`。
 
 ```shell
-qy@ubuntu:~/linux_command_train/project$ gcc -o string.i -E string.c
-qy@ubuntu:~/linux_command_train/project$ gcc -o main.i -E main.c
-qy@ubuntu:~/linux_command_train/project$ ll
+$ gcc -o string.i -E string.c
+$ gcc -o main.i -E main.c
+$ ll
 总用量 44
 drwxrwxr-x 2 qy qy  4096 8月  19 15:51 ./
 drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
@@ -109,9 +109,9 @@ drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
 ​	编译预处理之后的文件，需要使用的 gcc 参数为 `-S`。
 
 ```shell
-qy@ubuntu:~/linux_command_train/project$ gcc -o string.s -S string.i
-qy@ubuntu:~/linux_command_train/project$ gcc -o main.s -S main.i
-qy@ubuntu:~/linux_command_train/project$ ll
+$ gcc -o string.s -S string.i
+$ gcc -o main.s -S main.i
+$ ll
 总用量 52
 drwxrwxr-x 2 qy qy  4096 8月  19 15:53 ./
 drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
@@ -129,9 +129,9 @@ drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
 ​	对得到的汇编文件进行汇编，需要使用的 gcc 参数为 `-c`。
 
 ```shell
-qy@ubuntu:~/linux_command_train/project$ gcc -c string.s
-qy@ubuntu:~/linux_command_train/project$ gcc -c main.s
-qy@ubuntu:~/linux_command_train/project$ ll
+$ gcc -c string.s
+$ gcc -c main.s
+$ ll
 总用量 60
 drwxrwxr-x 2 qy qy  4096 8月  19 15:55 ./
 drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
@@ -151,8 +151,8 @@ drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
 ​	将的到的二进制文件和标准库进行链接，得到可执行的二进制文件，不需要任何参数。
 
 ```shell
-qy@ubuntu:~/linux_command_train/project$ gcc -o test string.o main.o
-qy@ubuntu:~/linux_command_train/project$ ll
+$ gcc -o test string.o main.o
+$ ll
 总用量 80
 drwxrwxr-x 2 qy qy  4096 8月  19 15:56 ./
 drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
@@ -171,8 +171,8 @@ drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
 ## 直接编译
 
 ```shell
-qy@ubuntu:~/linux_command_train/project$ gcc -o test *.c
-qy@ubuntu:~/linux_command_train/project$ ll
+$ gcc -o test *.c
+$ ll
 总用量 40
 drwxrwxr-x 2 qy qy  4096 8月  19 16:02 ./
 drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
@@ -184,23 +184,23 @@ drwxrwxr-x 4 qy qy  4096 8月  19 15:39 ../
 
 ## gcc 常用参数
 
-|     gcc编译选线      |                          选项的意义                          |
-| :------------------: | :----------------------------------------------------------: |
-|         `-E`         |                预处理指定的源文件，不进行编译                |
-|         `-S`         |               编译指定的源文件，但是不进行汇编               |
-|         `-c`         |            编译、汇编指定的源文件，但是不进行链接            |
-| `-o [file1] [file2]` |                将文件 `file2` 编译成 `file1`                 |
-|         `-I`         |              指定 `include` 包含文件的搜索目录               |
-|         `-g`         |   在编译的时候，生成调式信息，该册灰姑娘徐可以被调试器调试   |
-|         `-D`         |                 在程序编译的时候，指定一个宏                 |
-|         `-w`         |     不生成任何警告信息，不建议使用，有些时候警告就是错误     |
-|       `-Wall`        |                       生成所有警告信息                       |
-|        `-On`         | n 的取值范围：0-3。编译器的优化选项的 4 个级别，-O0表示没有优化，-O3优化级别最高 |
-|         `-l`         |                在程序编译的时候，指定使用的库                |
-|         `-L`         |                 指定编译的时候，搜索库的路径                 |
-|     `-fPIC/fpic`     |                     生成与位置无关的代码                     |
-|      `-shared`       |            生成共享目标文件，通常用在建立共享库时            |
-|        `-std`        |   指定 C 语言标准，如：-std = c99，gcc 默认的标准是 GNU C    |
+|       gcc编译选线        |                          选项的意义                          |
+| :----------------------: | :----------------------------------------------------------: |
+|           `-E`           |                预处理指定的源文件，不进行编译                |
+|           `-S`           |               编译指定的源文件，但是不进行汇编               |
+|         **`-c`**         |            编译、汇编指定的源文件，但是不进行链接            |
+| **`-o [file1] [file2]`** |                将文件 `file2` 编译成 `file1`                 |
+|         **`-I`**         |              指定 `include` 包含文件的搜索目录               |
+|         **`-g`**         |   在编译的时候，生成调式信息，该册灰姑娘徐可以被调试器调试   |
+|         **`-D`**         |                 在程序编译的时候，指定一个宏                 |
+|           `-w`           |     不生成任何警告信息，不建议使用，有些时候警告就是错误     |
+|       **`-Wall`**        |                       生成所有警告信息                       |
+|        **`-On`**         | n 的取值范围：0-3。编译器的优化选项的 4 个级别，-O0表示没有优化，-O3优化级别最高 |
+|         **`-l`**         |                在程序编译的时候，指定使用的库                |
+|         **`-L`**         |                 指定编译的时候，搜索库的路径                 |
+|     **`-fPIC/fpic`**     |                     生成与位置无关的代码                     |
+|      **`-shared`**       |            生成共享目标文件，通常用在建立共享库时            |
+|        **`-std`**        |   指定 C 语言标准，如：-std = c99，gcc 默认的标准是 GNU C    |
 
 ## 搜索头文件（`-I`）
 

@@ -23,11 +23,11 @@ rm 目录名 -rf
 ```
 
 ```shell
-qy@localhost:~$ ls
+$ ls
 公共  视频  文档  音乐  AD              Data-Structure  vim_test
 模板  图片  下载  桌面  cmakelist_test  snap
-qy@localhost:~$ rm AD -rf
-qy@localhost:~$ ls
+$ rm AD -rf
+$ ls
 公共  视频  文档  音乐  cmakelist_test  snap
 模板  图片  下载  桌面  Data-Structure  vim_test
 ```

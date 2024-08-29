@@ -1,3 +1,11 @@
+## tree 命令
+
+​	该命令的作用是 以树结构显示目录，tree 工具默认是没有的，需要手动安装。
+
+```shell
+sudo apt install tree
+```
+
 ## 查看当前目录的结构，n为显示的目录层数
 
 ```shell
@@ -12,7 +20,7 @@ tree 目录名 [-L -n]
 
 ```shell
 # 只显示1层
-[root@VM-8-14-centos ~]# tree -L 1
+# tree -L 1
 .
 |-- ace
 |-- file
@@ -21,7 +29,7 @@ tree 目录名 [-L -n]
 `-- luffy
 
 # 显示2层目录
-[root@VM-8-14-centos ~]# tree -L 2
+# tree -L 2
 .
 |-- ace
 |   `-- brother

@@ -12,23 +12,23 @@ $ sudo chown 新的所有者 文件名
 $ sudo chown 新的所有者:新的组名 文件名
 
 # 查看文件所有者：b.txt 属于 robin 用户
-robin@OS:~/Linux$ ll b.txt 
+$ ll b.txt 
 -rw-rw-rw- 2 robin robin 2929 Apr 14 18:53 b.txt
 
 # 将 b.txt 的所有者修改为 luffy
-robin@OS:~/Linux$ sudo chown luffy b.txt
+$ sudo chown luffy b.txt
 [sudo] password for robin: 
-robin@OS:~/Linux$ ll b.txt 
+$ ll b.txt 
 -rw-rw-rw- 2 luffy robin 2929 Apr 14 18:53 b.txt
 
 # 修改文件所有者和文件所属组
 # 查看文件所有者和所属组
-robin@OS:~/Linux$ ll b.txt 
+$ ll b.txt 
 -rw-rw-rw- 2 luffy robin 2929 Apr 14 18:53 b.txt
 
 # 同时修改文件所有者和文件所属组
-robin@OS:~/Linux$ sudo chown robin:luffy b.txt 
-robin@OS:~/Linux$ ll b.txt 
+$ sudo chown robin:luffy b.txt 
+$ ll b.txt 
 -rw-rw-rw- 2 robin luffy 2929 Apr 14 18:53 b.txt
 ```
 
@@ -39,12 +39,12 @@ robin@OS:~/Linux$ ll b.txt
 # 语法: sudo chgrp 新的组 文件名
 
 # 查看文件所属组信息
-robin@OS:~/Linux$ ll b.txt 
+$ ll b.txt 
 -rw-rw-rw- 2 robin luffy 2929 Apr 14 18:53 b.txt
 
 # 修改文件所属的组
-robin@OS:~/Linux$ sudo chgrp robin b.txt 
-robin@OS:~/Linux$ ll b.txt 
+$ sudo chgrp robin b.txt 
+$ ll b.txt 
 -rw-rw-rw- 2 robin robin 2929 Apr 14 18:53 b.txt
 ```
 
