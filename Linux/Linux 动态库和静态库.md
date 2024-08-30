@@ -145,7 +145,7 @@ int main()
 
 - 汇编
 
-```cmd
+```shell
 # 第一步，汇编，生成 .o 文件
 $ gcc *.c -c -I ./include/
 $ tree
@@ -167,7 +167,7 @@ $ tree
 
 - 打包
 
-```cmd
+```shell
 # 第二步，将生成的目标文件通过 ar 工具打包生成静态库
 $ ar rcs libcalc.a *.o
 $ tree
@@ -190,7 +190,7 @@ $ tree
 
 - 发布
 
-```cmd
+```shell
 # 第三步，将生成的静态库 libcalc.a 和库对应的头文件 head.h 一并发布给使用者即可
 # 3. 发布静态库
 	1. head.h    => 函数声明
@@ -210,7 +210,7 @@ $ tree
 
 ​	当我们得到了一个可用的静态库之后，需要将其放到一个目录中，然后根据得到的头文件编写测试代码，对静态库中的函数进行调用。
 
-```cmd
+```shell
 # 编译的时候指定库信息
 	-L: 指定库所在的目录(相对或者绝对路径)
 	-l: 指定库的名字, 掐头(lib)去尾(.a) ==> calc
@@ -252,20 +252,20 @@ a / b = 1.666667
 
 - 将源文件进行汇编操作，需要使用参数 `-c`，还需要添加额外参数 `-fpic/-fPIC`。
 
-```cmd
+```shell
 # 得到若干个 .o文件
 $ gcc 源文件(*.c) -c -fpic
 ```
 
-- 将得到的 `.o` 文件打包成动态库，还是使用 gcc，使用参数 `-shared` 指定生成动态库（位置没有要求）。
+- 将得到的 `.o` 文件打包成动态库，还是使用 `gcc`，使用参数 `-shared` 指定生成动态库（位置没有要求）。
 
-```cmd
+```shell
 $ gcc -shared 与位置无关的目标文件(*.o) -o 动态库(libxxx.so)
 ```
 
 - 发布动态库和头文件
 
-```cmd
+```shell
 # 发布
  	1. 提供头文件: xxx.h
  	2. 提供动态库: libxxx.so
@@ -275,7 +275,7 @@ $ gcc -shared 与位置无关的目标文件(*.o) -o 动态库(libxxx.so)
 
 - 目录
 
-```cmd
+```shell
 $ tree
 .
 ├── add.c
@@ -290,7 +290,7 @@ $ tree
 
 - 汇编
 
-```cmd
+```shell
 $ gcc *.c -c -fpic -I ./include/
 $ tree
 .
@@ -310,9 +310,9 @@ $ tree
 
 - 打包
 
-```cmd
-qy@ubuntu:~/linux_command_train/testso$ gcc -o libcalc.so *.o -shared
-qy@ubuntu:~/linux_command_train/testso$ tree
+```shell
+$ gcc -o libcalc.so *.o -shared
+$ tree
 .
 ├── add.c
 ├── add.o
@@ -331,7 +331,7 @@ qy@ubuntu:~/linux_command_train/testso$ tree
 
 - 发布
 
-```cmd
+```shell
 $ cp libcalc.so ./useso/
 $ cp ./include/head.h ./useso/
 $ cd ./useso/
@@ -347,7 +347,7 @@ $ tree
 
 ​	当我们得到了一个可用的动态库之后，需要将其放到一个目录中，然后根据得到的头文件编写测试代码，对动态库中的函数进行调用。
 
-```cmd
+```shell
 # 1. 拿到发布的动态库
 	`head.h   libcalc.so
 # 2. 基于头文件编写测试程序, 测试动态库中提供的接口是否可用
@@ -359,7 +359,7 @@ $ tree
 └── main.c          ==> 函数测试
 ```
 
-```cmd
+```shell
 $ gcc -o test main.c -L ./ -l calc
 $ tree
 .
@@ -377,7 +377,7 @@ a / b = 1.666667
 
 ### 查看可执行程序依赖的动态链接库
 
-```cmd
+```shell
 # 语法:
 $ ldd 可执行程序名
 
@@ -385,7 +385,7 @@ $ ldd 可执行程序名
 # 成功
 $ ldd ./test
 	linux-vdso.so.1 (0x00007ffc4c18d000)
-	libcalc.so (0x00007fc082583000)
+	libcalc.so (0x00007fc082583000) # 需要使用 libcalc.so 库
 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc08237b000)
 	/lib64/ld-linux-x86-64.so.2 (0x00007fc08258f000)
 # 失败	

@@ -9,14 +9,8 @@
 # sudo -> 使用管理员权限执行这个命令
 $ sudo adduser 用户名
 
-# centos
-$ sudo useradd 用户名
-
-# ubuntu
-$ sudo useradd -m -s /bin/bash  用户名
-
 # 在使用 adduser 添加新用户的时候，有的Linux版本执行完命令就结束了，有的版本会提示设置密码等用户信息
-qy@ubuntu:~$ qy@ubuntu:~$ sudo adduser test_user
+$ sudo adduser test_user
 [sudo] qy 的密码： 
 正在添加用户"test_user"...
 正在添加新组"test_user" (1001)...
@@ -34,21 +28,21 @@ passwd：已成功更新密码
         家庭电话 []: 
         其它 []: 
 这些信息是否正确？ [Y/n] y
-qy@ubuntu:~$ su - test_user 
+$ su - test_user 
 密码： 
-test_user@ubuntu:~$ whoami
+$ whoami
 test_user
 ```
 
 ## 删除用户
 
-​	删除用户并不是将 /home 下的用户家目录删除就完事了，我们需要使用 userdle 命令才能删除用户在系统中的用户 ID 和所属组 ID 等相关信息，但是需要注意的是某些 Linux 版本中用户虽然被删除了，但是它的家目录却没有被删除，需要我们手动将其删除。
+​	删除用户并不是将 `/home` 下的用户家目录删除就完事了，我们需要使用 `userdle` 命令才能删除用户在系统中的**用户 ID** 和**所属组 ID** 等相关信息，但是需要注意的是某些 Linux 版本中用户虽然被删除了，但是它的家目录却没有被删除，需要我们手动将其删除。
 
 ```shell
 # 删除用户, 添加参数 -r 就可以一并删除用户的家目录了
 $ sudo userdel 用户名 -r
 
-qy@ubuntu:~$ sudo userdel test_user -r
+$ sudo userdel test_user -r
 [sudo] qy 的密码： 
 userdel: test_user 邮件池 (/var/mail/test_user) 未找到
 qy@ubuntu:~$ ls home/
@@ -60,6 +54,8 @@ lost+found  qy
 ## 添加删除用户组
 
 ​	默认情况下，只要创建新用户就会得到一个同名的用户组，并且这个用户属于这个组。一般情况下不需要创建新的用户组，如果有需求可以使用 `groupadd` 添加用户组，使用 `groupdel` 删除用户组。
+
+​	通过查看 `/etc/group` 文件来验证用户组是否添加成功，里面有用户组相关信息。
 
 ```shell
 # 基于普通用户创建新的用户组

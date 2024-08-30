@@ -7,8 +7,8 @@
 ​	如果使用 tar 完成文件压缩，涉及的参数如下，在使用过程中参数没有先后顺序。
 
 - `c`：创建压缩文件。
-- `z`：使用 gzip 的方式进行文件压缩。
-- `j`：使用 bzip2 的方式进行文件压缩。
+- `z`：使用 `gzip` 的方式进行文件压缩。
+- `j`：使用 `bzip2` 的方式进行文件压缩。
 - `v`：压缩过程中显示压缩信息，可以省略不写。
 - `f`：指定压缩包的名字。
 
@@ -25,7 +25,7 @@ $ tar 参数 生成的压缩包的名字 要压缩的文件(文件或者目录)
 
 ```shell
 # 查看目录内容
-qy@ubuntu:~/linux_command_train$ ll
+$ ll
 总用量 92
 drwxrwxr-x  4 qy qy  4096 8月  15 21:53 ./
 drwxr-xr-x 24 qy qy  4096 8月  15 21:51 ../
@@ -40,7 +40,7 @@ drwxrwxr-x  2 qy qy  4096 8月  15 21:50 temp/
 -rw-rw-r--  1 qy qy  2982 8月  15 21:32 testTag.txt
 -rw-rw-r--  1 qy qy    12 8月  15 17:29 test.txt
 # 压缩目录中所有文件，如果要压缩某几个文件，直接指定文件名即可
-qy@ubuntu:~/linux_command_train$ tar zcvf all.tar.gz *
+$ tar zcvf all.tar.gz *
 all.zip
 bin/
 myprogram
@@ -51,9 +51,8 @@ testgcc
 testgcc.c
 testTag.txt
 test.txt
-
 # 查看目录文件，多了一个压缩文件 all.tar.gz
-qy@ubuntu:~/linux_command_train$ ll
+$ ll
 总用量 112
 drwxrwxr-x  4 qy qy  4096 8月  15 21:56 ./
 drwxr-xr-x 24 qy qy  4096 8月  15 21:51 ../
@@ -73,7 +72,7 @@ drwxrwxr-x  2 qy qy  4096 8月  15 21:50 temp/
 ### 使用`bzip2`的方式进行文件压缩
 
 ```shell
-qy@ubuntu:~/linux_command_train$ ll
+$ ll
 总用量 92
 drwxrwxr-x  4 qy qy  4096 8月  15 22:08 ./
 drwxr-xr-x 24 qy qy  4096 8月  15 21:51 ../
@@ -86,9 +85,9 @@ drwxrwxr-x  2 qy qy  4096 8月  15 21:50 temp/
 -rw-rw-r--  1 qy qy  1820 8月  15 21:53 testgcc.c
 -rw-rw-r--  1 qy qy  2982 8月  15 21:32 testTag.txt
 -rw-rw-r--  1 qy qy    12 8月  15 17:29 test.txt
-qy@ubuntu:~/linux_command_train$ tar jcvf part.tar.bz2 testgcc.c
+$ tar jcvf part.tar.bz2 testgcc.c
 testgcc.c
-qy@ubuntu:~/linux_command_train$ ll
+$ ll
 总用量 96
 drwxrwxr-x  4 qy qy  4096 8月  15 22:09 ./
 drwxr-xr-x 24 qy qy  4096 8月  15 21:51 ../
@@ -124,11 +123,11 @@ $ tar 参数 压缩包名
 $ tar 参数 压缩包名 -C 解压目录
 ```
 
-### 使用 gzip 的方式进行文件解压缩
+### 使用 `gzip` 的方式进行文件解压缩
 
 ```shell
 # 查看目录文件信息
-qy@ubuntu:~/linux_command_train$ ll
+$ ll
 总用量 92
 drwxrwxr-x  3 qy qy  4096 8月  15 22:16 ./
 drwxr-xr-x 24 qy qy  4096 8月  15 21:51 ../
@@ -143,7 +142,7 @@ drwxrwxr-x  2 qy qy  4096 8月  15 21:50 temp/
 -rw-rw-r--  1 qy qy    12 8月  15 17:29 test.txt
 
 # 将 all.tar.gz 压缩包压缩到 temp 目录中
-qy@ubuntu:~/linux_command_train$ tar zxvf all.tar.gz -C temp
+$ tar zxvf all.tar.gz -C temp
 all.zip
 bin/
 myprogram
@@ -156,7 +155,7 @@ testTag.txt
 test.txt
 
 # 查看 temp 目录内容，都是从压缩包中释放出来的
-qy@ubuntu:~/linux_command_train$ ll temp/
+$ ll temp/
 总用量 92
 drwxrwxr-x 4 qy qy  4096 8月  15 22:17 ./
 drwxrwxr-x 3 qy qy  4096 8月  15 22:16 ../
@@ -172,22 +171,22 @@ drwxrwxr-x 2 qy qy  4096 8月  15 21:50 temp/
 -rw-rw-r-- 1 qy qy    12 8月  15 17:29 test.txt
 ```
 
-### 使用 bzip2 的方式进行文件解压缩
+### 使用 `bzip2` 的方式进行文件解压缩
 
 ```shell
 # 删除 temp 目录中所有的文件
-qy@ubuntu:~/linux_command_train$ rm temp/* -rf
+$ rm temp/* -rf
 
 # 查看 temp 目录中的文件信息
-qy@ubuntu:~/linux_command_train$ ll temp/
+$ ll temp/
 总用量 8
 drwxrwxr-x 2 qy qy 4096 8月  15 22:22 ./
 drwxrwxr-x 3 qy qy 4096 8月  15 22:16 ../
 
 # 将 part.tar.bz2 中的文件压缩到 temp 目录中
-qy@ubuntu:~/linux_command_train$ tar jxvf part.tar.bz2 -C temp
+$ tar jxvf part.tar.bz2 -C temp
 testgcc.c
-qy@ubuntu:~/linux_command_train$ ll temp/
+$ ll temp/
 总用量 12
 drwxrwxr-x 2 qy qy 4096 8月  15 22:22 ./
 drwxrwxr-x 3 qy qy 4096 8月  15 22:16 ../

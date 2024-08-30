@@ -1,4 +1,4 @@
-## grep
+## grep（Global Regular Expression Print）
 
 ​	和 `find` 不同 `grep` 命令用于查找文件里符合条件的字符串，`grep` 命令中有几个常用的参数。
 
@@ -15,18 +15,18 @@ $ grep "搜索的内容" 搜索的路径/文件 参数
 
 ```shell
 # 搜索指定文件中是否有字符串 include
-qy@ubuntu:~/linux_command_train$ grep "include" testgcc.c
+$ grep "include" testgcc.c
 #include <stdio.h>
 #include <stdlib.h>
 
 # 不区分大小写进行搜索
-qy@ubuntu:~/linux_command_train$ grep "INCLUDE" testgcc.c
-qy@ubuntu:~/linux_command_train$ grep "INCLUDE" testgcc.c -i
+$ grep "INCLUDE" testgcc.c
+$ grep "INCLUDE" testgcc.c -i
 #include <stdio.h>
 #include <stdlib.h>
 
 # 搜索指定目录中哪些文件中包含字符串 include 并且显示关键字所在的行号
-qy@ubuntu:~/linux_command_train$ grep "include" ./ -rn
+$ grep "include" ./ -rn
 ./myprogram.c:1:#include <iostream>
 ./testgcc.c:1:#include <stdio.h>
 ./testgcc.c:2:#include <stdlib.h>

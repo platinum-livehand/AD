@@ -1,12 +1,12 @@
 ## find 
 
-​	`find`是 Linux 中一个搜索功能非常强大的工具，它的主要功能是根据文件的属性，查找对应的磁盘文件，比如说我们常用的一些属性，文件名，文件类型，文件大小，文件的目录深度 等。
+​	`find`是 Linux 中一个搜索功能非常强大的工具，它的主要功能是根据文件的属性，查找对应的磁盘文件，比如说我们常用的一些属性，**文件名**，**文件类型**，**文件大小**，**文件的目录深度** 等。
 
 ​	如果想通过属性对文件进行搜索，只需要指定出属性对应的参数就可以了。
 
 ## 文件名（-name）
 
-​	根据文件名进行搜索有两种方式，精确查询 和 模糊查询。关于模糊查询必须要使用对应的通配符，最常用的有两个，分别为 `*` 和 `?`。其中 `*` 可以匹配零个或者多个字符，`?`用于匹配单个字符。
+​	根据文件名进行搜索有两种方式，**精确查询** 和 **模糊查询**。关于模糊查询必须要使用对应的通配符，最常用的有两个，分别为 `*` 和 `?`。其中 `*` 可以匹配零个或者多个字符，`?`用于匹配单个字符。
 
 ​	如果我们进行模糊查询，建议将带有通配符的文件名写到引号中，这样可以避免搜索命令执行失败。
 
@@ -17,7 +17,7 @@ $ find 搜索的路径 -name 要搜索的文件名
 
 ```shell
 # 模糊搜索
-qy@ubuntu:~/linux_command_train$ find ./ -name "*.c"
+$ find ./ -name "*.c"
 ./myprogram.c
 ./testgcc.c
 ./temp/myprogram.c
@@ -26,7 +26,7 @@ qy@ubuntu:~/linux_command_train$ find ./ -name "*.c"
 ########################################################
 
 # 精确搜索
-qy@ubuntu:~/linux_command_train$ find ./ -name testgcc.c
+$ find ./ -name testgcc.c
 ./testgcc.c
 ./temp/testgcc.c
 ```
@@ -52,7 +52,7 @@ $ find 搜索的路径 -type 文件类型
 
 ```shell
 # 搜索软连接类型的文件
-qy@ubuntu:~/linux_command_train$ tree -L 2
+$ tree -L 2
 .
 ├── all.tar.gz
 ├── myprogram
@@ -69,7 +69,7 @@ qy@ubuntu:~/linux_command_train$ tree -L 2
 └── test.txt
 
 1 directory, 12 files
-qy@ubuntu:~/linux_command_train$ find ./ -type l
+$ find ./ -type l
 ./temp/test.lnk
 
 ```
@@ -114,7 +114,7 @@ $ find ./ -size +1M -size -4M
 
 ```shell
 # 必须先指定 -maxdepth 或者 -mindepth 属性，才能指定其他属性
-qy@ubuntu:~/linux_command_train$ sudo find / -maxdepth 1 -type l
+$ sudo find / -maxdepth 1 -type l
 [sudo] qy 的密码： 
 /bin
 /lib64
@@ -131,7 +131,7 @@ qy@ubuntu:~/linux_command_train$ sudo find / -maxdepth 1 -type l
 ```shell
 # 比如: 通过find搜索目录中后缀为 .txt 的文件, 然后再查看这些满足条件的文件的详细信息
 # 在find操作中直接通过管道操作多个指令, 最终输出的结果是有问题, 因此不能直接这样使用
-qy@ubuntu:~/linux_command_train$ find ./ -name "*.txt" | ls -l
+$ find ./ -name "*.txt" | ls -l
 总用量 52
 -rwxrwxr-x 1 qy qy 17368 8月  10 16:30 myprogram
 -rw-rw-r-- 1 qy qy   236 8月  15 15:14 myprogram.c
@@ -154,9 +154,9 @@ $ find 路径 参数 参数值 -exec shell命令2 {} \;
 ```
 
 ```shell
-qy@ubuntu:~/linux_command_train$ find ./ -name "*.txt"
+$ find ./ -name "*.txt"
 ./testTag.txt
-qy@ubuntu:~/linux_command_train$ find ./ -name "*.txt" -exec ls -l {} \;
+$ find ./ -name "*.txt" -exec ls -l {} \;
 -rw-rw-r-- 1 qy qy 2982 8月  15 21:32 ./testTag.txt
 ```
 
@@ -219,3 +219,6 @@ robin@OS:~$ find ./ -maxdepth 1  -name "*.cpp" | xargs ls -l
 -xargs: 将find查询的结果一次性传递给后边的shell命令
 ```
 
+- `ls -l`需要文件名作为命令行参数。如果没有提供文件名，它将列出当前目录的内容。
+- 当你使用管道将 find 的输出传递给 `ls -l` 时，`ls` 不会将这些输入视为文件名，而是会忽略它们。
+- `xargs`会将标准输入的内容转换为命令行参数，从而使 `ls` 能够正确处理这些文件名。

@@ -18,7 +18,7 @@ $ zip [-r]  压缩包名 要压缩的文件
 
 ```shell
 # 查看目录文件信息
-qy@ubuntu:~/linux_command_train$ ll
+$ ll
 总用量 92
 drwxrwxr-x  3 qy qy  4096 8月  15 22:16 ./
 drwxr-xr-x 24 qy qy  4096 8月  15 21:51 ../
@@ -33,12 +33,12 @@ drwxrwxr-x  2 qy qy  4096 8月  15 22:28 temp/
 -rw-rw-r--  1 qy qy    12 8月  15 17:29 test.txt
 
 # 压缩 文件 testgcc.c myprogram.c 得到压缩包 src.zip（不需要指定后缀，自动添加）
-qy@ubuntu:~/linux_command_train$ zip src testgcc.c myprogram.c -r
+$ zip src testgcc.c myprogram.c -r
   adding: testgcc.c (deflated 70%)
   adding: myprogram.c (deflated 35%)
   
 # 查看目录文件信息，多了一个压缩包文件 src.zip
-qy@ubuntu:~/linux_command_train$ ll
+$ ll
 总用量 96
 drwxrwxr-x  3 qy qy  4096 8月  15 22:29 ./
 drwxr-xr-x 24 qy qy  4096 8月  15 21:51 ../
@@ -60,20 +60,20 @@ drwxrwxr-x  2 qy qy  4096 8月  15 22:28 temp/
 
 ```shell
 # 删除 temp 目录中的所有文件
-qy@ubuntu:~/linux_command_train$ rm temp/* -rf
-qy@ubuntu:~/linux_command_train$ ll temp/
+$ rm temp/* -rf
+$ ll temp/
 总用量 8
 drwxrwxr-x 2 qy qy 4096 8月  15 22:28 ./
 drwxrwxr-x 3 qy qy 4096 8月  15 22:29 ../
 
 # 将 src.zip 解压缩到 temp 目录中
-qy@ubuntu:~/linux_command_train$ unzip src.zip -d temp/
+$ unzip src.zip -d temp/
 Archive:  src.zip
   inflating: temp/testgcc.c          
   inflating: temp/myprogram.c
 
 # 查看 temp 目录中的文件信息
-qy@ubuntu:~/linux_command_train$ ll temp/
+$ ll temp/
 总用量 16
 drwxrwxr-x 2 qy qy 4096 8月  15 22:33 ./
 drwxrwxr-x 3 qy qy 4096 8月  15 22:29 ../
